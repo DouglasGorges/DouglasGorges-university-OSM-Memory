@@ -23,8 +23,8 @@ public class MemorySimulator {
 		System.out.println("");
 		int index = 0;
 
-		for (int i = 1; i <= 30; i++) { // trocar o 4 por 30
-			int frame = generator.nextInt(4) + 1; // trocar o 4 por 8
+		for (int i = 1; i <= 30; i++) {
+			int frame = generator.nextInt(8) + 1;
 			System.out.println("Tamanho do frame: " + frame);
 			boolean control = true;
 
@@ -43,24 +43,21 @@ public class MemorySimulator {
 								break;
 							}
 						}
-					} // TODO ELSE not working yet
+					}
 				} else {
-					for (int m = 0; m <= 1; m++) {
+					for (int m = 0; m <= myMemory.length; m++) {
 						if (frame <= alocationSize[m]) {
 							for (int aloc = alocationStart[m]; aloc <= alocationStart[m] + alocationSize[m]
 									- 1; aloc++) {
 								myMemory[aloc] = 0;
 							}
-							
-							for (int u = 0; u < myMemory.length; u++) {
-								System.out.print(myMemory[u]);}
-							
+
 							for (int aloc = alocationStart[m]; aloc <= alocationStart[m] + frame - 1; aloc++) {
 								myMemory[aloc] = 1;
 							}
-							for (int v = 0; v < myMemory.length; v++) {
-								System.out.print("");
-								System.out.println(myMemory[v]);}
+
+							control = false;
+							break;
 						}
 					}
 				}
